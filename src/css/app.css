@@ -1,0 +1,16 @@
+body{
+	background-color: #d4cdb9;
+	
+}
+.nav{
+	background-color: #baab91;
+}
+.window{
+	background-color: #e8e8ed;
+	height:180px;
+	overflow: scroll;
+}
+.input{
+	background-color: #bfbbb9;
+	padding: 5px;
+}

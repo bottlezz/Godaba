@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="./boostrap/css/bootstrap.css">
+		<link rel="stylesheet" href="./css/app.css"></link>
+		<script type="text/javascript" src="./boostrap/js/jquery.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="js/react.js"></script>
+    	<script src="js/JSXTransformer.js"></script>
+		<script type="text/jsx" src="appWidget.jsx"></script>
+	</head>
+</html>
+<body>
+	<div id="container">
+		
+	</div>
+</body>
+<script type="text/jsx">
+	var app= React.render(
+        <AppWidget />,
+        document.getElementById('container')
+      );
+</script>
+<script type="text/javascript" src="app.js">
