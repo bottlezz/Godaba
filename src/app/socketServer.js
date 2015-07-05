@@ -23,6 +23,7 @@ function socketServer(target){
 			console.log('disconnect');
 		});
 		socket.on('msg',function(msg){
+			console.log("received:"+msg);
 			io.emit('msg',msg);
 		});
 		socket.on('join',function(data){

@@ -11,14 +11,10 @@ function renderApp(){
 };
 
 //socket io setup
-var socket =io.connect('http://localhost:8000');
+var socket;
   
 
-  socket.on('msg', function(msg){
-	   if(app!=null){
-		   app.updateText(msg);
-	   }
-  });
+  
 
 /* main logic starts here; */
 
@@ -28,6 +24,13 @@ if(roomid=="/"){
 	//main page, do nothing;
 }else{
 	//connect room;
+	socket=io();
+	socket.on('msg', function(msg){
+	   if(app!=null){
+		   app.updateText(msg);
+	   }
+  	});
+	
 	//rendre page;
 	app=renderApp();
 	
