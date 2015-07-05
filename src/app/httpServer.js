@@ -10,6 +10,8 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+var roomList = new Map();
+
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'html');
@@ -24,8 +26,13 @@ app.use(express.static(__dirname+'/public'));
 
 //app.use('/', routes);
 //app.use('/users', users);
+app.use(function(req,res,next){
+   res.sendfile('public/index.html');
+   console.log("file send");
+});
 
 // catch 404 and forward to error handler
+
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
@@ -37,12 +44,12 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+/*if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
      res.send('404');
   });
-}
+}*/
 
 // production error handler
 // no stacktraces leaked to user
