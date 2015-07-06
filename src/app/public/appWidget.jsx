@@ -36,7 +36,7 @@ var TopBox = React.createClass({
 	}
 });
 var MessageBox = React.createClass({
-	componentDidUpdate( prevProps,  prevState)
+	componentDidUpdate:function( prevProps,  prevState)
 	{
 		this.getDOMNode().scrollTop=this.getDOMNode().scrollHeight;
 	},

@@ -5,7 +5,7 @@ function scrollBottom(){
 
 function renderApp(){
 	return React.render(
-        <AppWidget socket={socket} />,
+        React.createElement(AppWidget, {socket: socket}),
         document.getElementById('container')
       );	
 };
