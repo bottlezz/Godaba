@@ -1,29 +1,39 @@
 var ChatWidget=React.createClass({
 	getInitialState: function() {
       return {text: "", messages:[]};
-    },
+  },
+	componentDidMount:function(){
+		this.props.socket.app=this;
+		this.props.socket.emit("room_join",this.props.roomId);
+		this.props.socket.on('room_msg', function(msg){
+				//"this" is socket here.
+				this.app.updateText(msg.content);
+
+		});
+	},
 	updateText: function(t){
 
 	    var update=this.state.messages.concat(t);
 		this.setState({messages:update});
-		
+
 	},
 	sendToServer:function(msg){
-		this.props.socket.emit('msg',msg);
+		this.props.socket.emit('room_msg',{type:10, roomId:this.props.roomId, userId:this.props.user, content:msg});
 	},
 	render:function(){
+
 		return(
 			<div>
 			<span>{this.state.text}</span>
 			 <TopBox title="DashBoard" />
-			 <MessageBox ref='msgWin' items={this.state.messages}/> 
-			 <InputBox 
+			 <MessageBox ref='msgWin' items={this.state.messages}/>
+			 <InputBox
 			 	onMsgSend={this.sendToServer}
 			 />
 			</div>
 		);
 	}
-	
+
 });
 
 var TopBox = React.createClass({
@@ -45,7 +55,7 @@ var MessageBox = React.createClass({
 			return <MessageLine text={itemText} />
 		}
 		return (
-			<div className={"window"}>this is message box 
+			<div className={"window"}>this is message box
 			{this.props.items.map(createLine)}
 			</div>
 		);
@@ -64,7 +74,7 @@ var InputBox = React.createClass({
 			<form onSubmit={this.handleSubmit}>
 			<input type="text" placeholder="Type here..." ref="userInput" />
 			<button>Send</button>
-			
+
 			</form>
 			</div>
 		);
@@ -78,4 +88,3 @@ var MessageLine = React.createClass ({
 		);
 	}
 });
-

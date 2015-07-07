@@ -1,6 +1,6 @@
 function socketServer(target){
-	
-	
+
+
 	var io= require('socket.io')(target);
 	// will move the room management component out later as a saperated service.
 	var rooms= new Set();
@@ -21,21 +21,27 @@ function socketServer(target){
 	//var rooms = new Map();
 
 	//var users = new Map();
-	
+
 	io.on('connection',function(socket){
 		//connection management;
 		console.log("new conn");
 		socket.on('disconnect',function(){
 			console.log('disconnect');
 		});
-		socket.on('msg',function(msg){
-			console.log("received:"+msg);
-			io.emit('msg',msg);
+		socket.on('room_msg',function(msg){
+			console.log("received:"+msg.roomId);
+			io.to(msg.roomId).emit('room_msg',msg);
 		});
 		socket.on('room_join',function(data){
+
 			if(!isRoomEmpty(data)){
-				console.log(data);
-				io.to(data).emit('msg','new join');	
+				//console.log(data);
+				socket.join(data);
+				io.to(data).emit('room_msg',{content:"New Join"});
+			}else{
+				createRoom(data);
+				socket.join(data);
+				io.to(data).emit('room_msg',{content:"New Join"});
 			}
 		});
 		socket.on('room_create',function(id){
@@ -47,11 +53,11 @@ function socketServer(target){
 			return isRoomEmpty(id);
 		});
 	});
-	
+
 
 	return this;
-	
-	
+
+
 };
 
 

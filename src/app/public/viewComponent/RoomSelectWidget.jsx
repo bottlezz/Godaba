@@ -10,7 +10,7 @@ var RoomSelectWidget = React.createClass({
 			<form onSubmit={this.handleSubmit}>
 			<input type="text" placeholder="Type here..." ref="userInput" />
 			<button>Send</button>
-			
+
 			</form>
 			</div>
 		);
@@ -21,9 +21,6 @@ var CreateRoomWidget = React.createClass({
 	getInitialState: function() {
 	    return {roomName: ""};
 	  },
-	handleSubmit: function(e){
-		 e.preventDefault();
-	},
 	handleChange: function() {
         this.setState({roomName:this.refs.filterTextInput.getDOMNode().value});
         console.log(this.state.roomName);
@@ -31,10 +28,10 @@ var CreateRoomWidget = React.createClass({
 	render:function(){
 		var name=this.state.roomName;
 		return (
-			<form onSubmit={this.handleSubmit}>
+			<form action={name} method="GET">
 				<div>
 				<input  type="text" placeholder="room302...(no space)" ref="filterTextInput" onChange={this.handleChange}/>
-				<a href={"/"+name}>Join</a>
+				<button>Join</button>
 				</div>
 				<div>
 					<span>{name}</span>
@@ -42,7 +39,7 @@ var CreateRoomWidget = React.createClass({
 			</form>
 		);
 	}
-	
+
 });
 
 var JoinRoomWidget = React.createClass({

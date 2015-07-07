@@ -1,0 +1,6 @@
+Data format:
+Type Code 	User	Room	Action	Data
+10	1451	674	11(join)	Null
+10	1451	674	21(send)	{What are you doing}
+10	1451	674	12(exit)	NULL
+10	1451	674	13(name update)	John (server will broadcast, not store)

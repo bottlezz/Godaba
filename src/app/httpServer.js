@@ -27,7 +27,7 @@ app.use(express.static(__dirname+'/public'));
 //app.use('/', routes);
 //app.use('/users', users);
 app.use(function(req,res,next){
-   res.sendfile('public/index.html');
+   res.sendFile(__dirname+'/public/index.html');
    console.log("file send");
 });
 
