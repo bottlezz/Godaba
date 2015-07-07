@@ -3,13 +3,18 @@ function scrollBottom(){
 	$msgWin.scrollTop($msgWin.scrollHeight);
 };
 
-function renderApp(){
+function renderChat(){
 	return React.render(
-        <AppWidget socket={socket} />,
+        <ChatWidget socket={socket} />,
         document.getElementById('container')
       );	
 };
-
+function renderSelect(){
+	return React.render(
+        <CreateRoomWidget />,
+        document.getElementById('container')
+      );	
+};
 //socket io setup
 var socket =io();
   
@@ -26,9 +31,10 @@ var roomid=window.location.pathname;
 var app;
 if(roomid=="/"){
 	//main page, do nothing;
+	renderSelect();
 }else{
 	//connect room;
 	//rendre page;
-	app=renderApp();
+	app=renderChat();
 	
 }

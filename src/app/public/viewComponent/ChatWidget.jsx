@@ -1,4 +1,4 @@
-var AppWidget=React.createClass({
+var ChatWidget=React.createClass({
 	getInitialState: function() {
       return {text: "", messages:[]};
     },
