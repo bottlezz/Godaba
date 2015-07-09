@@ -53,11 +53,6 @@ function socketServer(target){
 			return isRoomEmpty(id);
 		});
 	});
-
-
-	return this;
-
-
 };
 
 

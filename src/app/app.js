@@ -4,5 +4,4 @@ var httpServer = require("./httpServer").listen(8000, function(){
   console.log('Example app listening at http://%s:%s', host, port);
 });
 
-var socketServer = require('./socketServer')(httpServer);
-
+var socketServer =new require('./socketServer')(httpServer);
