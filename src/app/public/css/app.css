@@ -8,7 +8,18 @@ body{
 .messageWidget{
 	background-color: #e8e8ed;
 	height:180px;
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+.messageWidget li {
+	display:block;
+}
+.messageWidget ul li p {
+	word-wrap: break-word;
+}
+.messageWidget ul li span {
+	text-align: right;
+	padding: 0;
 }
 .inputWidget{
 	background-color: #bfbbb9;

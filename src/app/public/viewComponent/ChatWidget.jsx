@@ -4,21 +4,21 @@ var ChatWidget=React.createClass({
   },
 	componentDidMount:function(){
 		this.props.socket.app=this;
-		this.props.socket.emit("room_join",this.props.roomId);
+		this.props.socket.emit("room_join",{roomId:this.props.roomId,userId:this.props.userId});
 		this.props.socket.on('room_msg', function(msg){
 				//"this" is socket here.
-				this.app.updateText(msg.content);
+				this.app.updateText(msg);
 
 		});
 	},
 	updateText: function(t){
 
-	    var update=this.state.messages.concat(t);
+	  var update=this.state.messages.concat(t);
 		this.setState({messages:update});
 
 	},
 	sendToServer:function(msg){
-		this.props.socket.emit('room_msg',{type:10, roomId:this.props.roomId, userId:this.props.user, content:msg});
+		this.props.socket.emit('room_msg',{type:10, roomId:this.props.roomId, userId:this.props.userId,action:"msg", content:msg});
 	},
 	render:function(){
 
@@ -51,12 +51,15 @@ var MessageBox = React.createClass({
 		this.getDOMNode().scrollTop=this.getDOMNode().scrollHeight;
 	},
 	render:function(){
-		var createLine = function(itemText, index){
-			return <MessageLine text={itemText} />
+		var createLine = function(data, index){
+			return <MessageLine data={data}/>
 		}
 		return (
-			<div className={"messageWidget row"}>this is message box
+			<div className={"messageWidget row"}>
+				<p className = "col-md-11">Welcome!</p>
+				<ul className = "col-md-11">
 			{this.props.items.map(createLine)}
+			</ul>
 			</div>
 		);
 	}
@@ -99,8 +102,19 @@ var InputBox = React.createClass({
 
 var MessageLine = React.createClass ({
 	render:function(){
-		return (
-			<li>{this.props.text} </li>
-		);
+	  if(this.props.data.action=="msg"){
+			return (
+				<li className={"row"}>
+					<span className={"col-md-1"}>{this.props.data.userId+":"}</span>
+					<p className={"col-md-10"}>{this.props.data.content}</p>
+				</li>
+			);
+		}else{
+			return (
+				<li className={"row"}>
+				<p className={"col-md-11"}>{this.props.data.content}</p>
+				</li>
+			)
+		}
 	}
 });

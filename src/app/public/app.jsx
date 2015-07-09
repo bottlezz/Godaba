@@ -2,10 +2,10 @@ function scrollBottom(){
 	var $msgWin=$('.window');
 	$msgWin.scrollTop($msgWin.scrollHeight);
 };
-
-function renderChat(socket,roomid){
+//userid is user's name, space allowed.
+function renderChat(socket,roomid,userid){
 	return React.render(
-        <ChatWidget socket={socket} roomId={roomid}/>,
+        <ChatWidget socket={socket} roomId={roomid} userId={userid}/>,
         document.getElementById('container')
       );
 };
@@ -23,7 +23,7 @@ var socket =io();
 
 
 
-var roomid=window.location.pathname;
+var roomid=decodeURI(window.location.pathname);
 var app;
 if(roomid=="/"){
 	//main page, do nothing;
@@ -33,7 +33,7 @@ if(roomid=="/"){
 	//connect room;
 
 	//render chat;
-	var chat=renderChat(socket,roomid);
+	var chat=renderChat(socket,roomid,"fake guy");
 
 
 }

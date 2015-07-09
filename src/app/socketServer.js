@@ -27,6 +27,7 @@ function socketServer(target){
 		console.log("new conn");
 		socket.on('disconnect',function(){
 			console.log('disconnect');
+			io.to(socket.id).emit('room_msg',{content:"one has leaved the room"});
 		});
 		socket.on('room_msg',function(msg){
 			console.log("received:"+msg.roomId);
@@ -34,14 +35,14 @@ function socketServer(target){
 		});
 		socket.on('room_join',function(data){
 
-			if(!isRoomEmpty(data)){
+			if(!isRoomEmpty(data.roomId)){
 				//console.log(data);
-				socket.join(data);
-				io.to(data).emit('room_msg',{content:"New Join"});
+				socket.join(data.roomId);
+				io.to(data.roomId).emit('room_msg',{content:data.userId + " has joined the room"});
 			}else{
-				createRoom(data);
-				socket.join(data);
-				io.to(data).emit('room_msg',{content:"New Join"});
+				createRoom(data.roomId);
+				socket.join(data.roomId);
+				io.to(data.roomId).emit('room_msg',{content:data.userId + " has joined the room"});
 			}
 		});
 		socket.on('room_create',function(id){
