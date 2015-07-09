@@ -39,7 +39,7 @@ var ChatWidget=React.createClass({
 var TopBox = React.createClass({
 	render:function(){
 		return (
-			<div className={"nav"}>
+			<div className={"navWidget row"}>
 			<h2>{this.props.title}</h2>
 			</div>
 		);
@@ -55,7 +55,7 @@ var MessageBox = React.createClass({
 			return <MessageLine text={itemText} />
 		}
 		return (
-			<div className={"window"}>this is message box
+			<div className={"messageWidget row"}>this is message box
 			{this.props.items.map(createLine)}
 			</div>
 		);
@@ -67,13 +67,29 @@ var InputBox = React.createClass({
 		 e.preventDefault();
 		 this.props.onMsgSend(this.refs.userInput.getDOMNode().value);
 		 this.refs.userInput.getDOMNode().value="";
+		 autosize.update(jQuery(this.refs.userInput.getDOMNode()));
+	},
+	componentDidMount:function(){
+		jQuery(this.refs.userInput.getDOMNode()).keydown(function(e){
+				// Enter was pressed without shift key
+			if (e.keyCode == 13 && !e.shiftKey)
+			{
+			    // prevent default behavior
+			    e.preventDefault();
+					jQuery(this).next('input[type=submit]').trigger("click");
+			}
+		});
+		autosize(jQuery(this.refs.userInput.getDOMNode()));
 	},
 	render:function(){
 		return (
-			<div className={"input"}>
+			<div className={"inputWidget row"}>
 			<form onSubmit={this.handleSubmit}>
-			<input type="text" placeholder="Type here..." ref="userInput" />
-			<button>Send</button>
+				<div clasNames={"row"}>
+					<textarea className={"col-md-10"} rows="1" placeholder="Type here..." ref="userInput"></textarea>
+					<input className={"col-md-2"} type="submit" value="send"/>
+				</div>
+
 
 			</form>
 			</div>
