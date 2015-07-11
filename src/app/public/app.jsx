@@ -6,13 +6,13 @@ function scrollBottom(){
 function renderChat(socket,roomid){
 	return React.render(
         <ChatWidget socket={socket} roomId={roomid}/>,
-        document.getElementById('container')
+        document.body
       );
 };
 function renderSelect(){
 	return React.render(
         <CreateRoomWidget />,
-        document.getElementById('container')
+        document.body
       );
 };
 //socket io setup

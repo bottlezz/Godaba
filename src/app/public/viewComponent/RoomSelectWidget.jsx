@@ -30,7 +30,7 @@ var CreateRoomWidget = React.createClass({
 		return (
 			<form action={name} method="GET">
 				<div>
-				<input  type="text" placeholder="room302...(no space)" ref="filterTextInput" onChange={this.handleChange}/>
+				<input type="text" placeholder="room302...(no space)" ref="filterTextInput" onChange={this.handleChange}/>
 				<button>Join</button>
 				</div>
 				<div>

@@ -1,6 +1,7 @@
 body{
 	background-color: #d4cdb9;
-
+	min-height: 2000px;
+	padding-top: 50px;
 }
 .navWidget{
 	background-color: #baab91;
@@ -16,6 +17,7 @@ body{
 }
 .messageWidget ul li p {
 	word-wrap: break-word;
+	    white-space: pre-wrap;
 }
 .messageWidget ul li span {
 	text-align: right;
@@ -27,8 +29,4 @@ body{
 }
 .inputWidget textarea{
 	max-height: 65px;
-}
-#container{
-	margin: auto;
-	max-width: 960px;
 }

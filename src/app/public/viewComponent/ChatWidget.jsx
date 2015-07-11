@@ -1,23 +1,22 @@
 var ChatWidget=React.createClass({
 	getInitialState: function() {
-      return {text: "", messages:[]};
+      return { messages:[]};
   },
 	componentDidMount:function(){
+		//initial socket io once loaded.
 		this.props.socket.app=this;
-
 		this.props.socket.on('room_msg', function(msg){
 				//"this" is socket here.
 				this.app.updateText(msg);
-
 		});
 	},
 	updateText: function(t){
-
+		//handle message input
 	  var update=this.state.messages.concat(t);
 		this.setState({messages:update});
-
 	},
 	updateName:function (e){
+		//handle name input
 		e.preventDefault();
 		var name=this.refs.nameBox.getDOMNode().value;
 		this.props.userId=name;
@@ -41,13 +40,14 @@ var ChatWidget=React.createClass({
 
 			return(
 				<div>
-				<span>{this.state.text}</span>
 				 <TopBox title="DashBoard" />
+				<div className={"container"}>
 				 <MessageBox ref='msgWin' items={this.state.messages}/>
 				 <InputBox
 				 	onMsgSend={this.sendToServer}
 				 />
 				</div>
+			</div>
 			);
 		}
 	}
@@ -57,9 +57,16 @@ var ChatWidget=React.createClass({
 var TopBox = React.createClass({
 	render:function(){
 		return (
-			<div className={"navWidget row"}>
-			<h2>{this.props.title}</h2>
-			</div>
+			<nav className={"navbar navbar-default navbar-fixed-top navWidget"}>
+  <div className={"container-fluid"}>
+    <div className={"navbar-header"}>
+      <a className={"navbar-brand"} href="#">
+        	<span>{this.props.title}</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
 		);
 	}
 });
@@ -97,7 +104,7 @@ var InputBox = React.createClass({
 			{
 			    // prevent default behavior
 			    e.preventDefault();
-					jQuery(this).next('input[type=submit]').trigger("click");
+					jQuery(this).closest("form").find("input[type=submit]").trigger("click");
 			}
 		});
 		autosize(jQuery(this.refs.userInput.getDOMNode()));
@@ -106,10 +113,15 @@ var InputBox = React.createClass({
 		return (
 			<div className={"inputWidget row"}>
 			<form onSubmit={this.handleSubmit}>
-				<div clasNames={"row"}>
-					<textarea className={"col-md-10"} rows="1" placeholder="Type here..." ref="userInput"></textarea>
-					<input className={"col-md-2"} type="submit" value="send"/>
+				<div className={"col-xs-9 nopadding"}>
+					<textarea rows="1" className={"form-control"} placeholder="Type here..." ref="userInput">
+					</textarea>
 				</div>
+				<input type="submit" className={" btn col-xs-3"} value="send"/>
+
+
+
+
 
 
 			</form>
@@ -123,8 +135,8 @@ var MessageLine = React.createClass ({
 	  if(this.props.data.action=="msg"){
 			return (
 				<li className={"row"}>
-					<span className={"col-md-1"}>{this.props.data.userId+":"}</span>
-					<p className={"col-md-10"}>{this.props.data.content}</p>
+					<span className={"col-md-1 col-xs-2"}>{this.props.data.userId+":"}</span>
+					<p className={"col-md-10 col-xs-10"}>{this.props.data.content}</p>
 				</li>
 			);
 		}else{
