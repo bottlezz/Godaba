@@ -4,7 +4,7 @@ var ChatWidget=React.createClass({
   },
 	componentDidMount:function(){
 		this.props.socket.app=this;
-		this.props.socket.emit("room_join",{roomId:this.props.roomId,userId:this.props.userId});
+
 		this.props.socket.on('room_msg', function(msg){
 				//"this" is socket here.
 				this.app.updateText(msg);
@@ -17,21 +17,39 @@ var ChatWidget=React.createClass({
 		this.setState({messages:update});
 
 	},
+	updateName:function (e){
+		e.preventDefault();
+		var name=this.refs.nameBox.getDOMNode().value;
+		this.props.userId=name;
+		this.props.socket.emit("room_join",{roomId:this.props.roomId,userId:this.props.userId});
+		this.forceUpdate();
+	},
 	sendToServer:function(msg){
 		this.props.socket.emit('room_msg',{type:10, roomId:this.props.roomId, userId:this.props.userId,action:"msg", content:msg});
 	},
 	render:function(){
+		if(this.props.userId==null){
+			return(
 
-		return(
-			<div>
-			<span>{this.state.text}</span>
-			 <TopBox title="DashBoard" />
-			 <MessageBox ref='msgWin' items={this.state.messages}/>
-			 <InputBox
-			 	onMsgSend={this.sendToServer}
-			 />
-			</div>
-		);
+				<form onSubmit={this.updateName}>
+					<label>Your Name:</label>
+					<input ref="nameBox" type="text" palceholder="John.Doe"></input>
+					<input type="submit" value="Done"></input>
+				</form>
+			);
+		}else{
+
+			return(
+				<div>
+				<span>{this.state.text}</span>
+				 <TopBox title="DashBoard" />
+				 <MessageBox ref='msgWin' items={this.state.messages}/>
+				 <InputBox
+				 	onMsgSend={this.sendToServer}
+				 />
+				</div>
+			);
+		}
 	}
 
 });

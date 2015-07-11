@@ -27,14 +27,18 @@ function socketServer(target){
 		console.log("new conn");
 		socket.on('disconnect',function(){
 			console.log('disconnect');
-			io.to(socket.id).emit('room_msg',{content:"one has leaved the room"});
+			var user=users.get(this.id);
+			if(user!=null){
+				users.delete(this.id);
+				io.to(user.roomId).emit('room_msg',{content:user.userId+" has left the room"});
+			}
 		});
 		socket.on('room_msg',function(msg){
 			console.log("received:"+msg.roomId);
 			io.to(msg.roomId).emit('room_msg',msg);
 		});
 		socket.on('room_join',function(data){
-
+			users.set(this.id,{userId:data.userId,roomId:data.roomId});
 			if(!isRoomEmpty(data.roomId)){
 				//console.log(data);
 				socket.join(data.roomId);

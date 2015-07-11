@@ -3,9 +3,9 @@ function scrollBottom(){
 	$msgWin.scrollTop($msgWin.scrollHeight);
 };
 //userid is user's name, space allowed.
-function renderChat(socket,roomid,userid){
+function renderChat(socket,roomid){
 	return React.render(
-        <ChatWidget socket={socket} roomId={roomid} userId={userid}/>,
+        <ChatWidget socket={socket} roomId={roomid}/>,
         document.getElementById('container')
       );
 };
@@ -33,7 +33,7 @@ if(roomid=="/"){
 	//connect room;
 
 	//render chat;
-	var chat=renderChat(socket,roomid,"fake guy");
+	var chat=renderChat(socket,roomid);
 
 
 }
