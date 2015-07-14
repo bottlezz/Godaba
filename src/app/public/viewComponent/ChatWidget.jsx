@@ -30,46 +30,32 @@ var ChatWidget=React.createClass({
 		if(this.props.userId==null){
 			return(
 
-				<form onSubmit={this.updateName}>
-					<label>Your Name:</label>
-					<input ref="nameBox" type="text" palceholder="John.Doe"></input>
-					<input type="submit" value="Done"></input>
+				<form onSubmit={this.updateName} className="col-xs-10 col-md-5">
+					<div className={"form-group"}>
+						<label>Your Name:</label>
+						<input ref="nameBox" type="text" palceholder="John.Doe" className={"form-control"}></input>
+					</div>
+					<input type="submit" value="Done" className={"btn"}></input>
 				</form>
 			);
 		}else{
 
 			return(
+
 				<div>
-				 <TopBox title="DashBoard" />
-				<div className={"container"}>
 				 <MessageBox ref='msgWin' items={this.state.messages}/>
 				 <InputBox
 				 	onMsgSend={this.sendToServer}
 				 />
 				</div>
-			</div>
+
 			);
 		}
 	}
 
 });
 
-var TopBox = React.createClass({
-	render:function(){
-		return (
-			<nav className={"navbar navbar-default navbar-fixed-top navWidget"}>
-  <div className={"container-fluid"}>
-    <div className={"navbar-header"}>
-      <a className={"navbar-brand"} href="#">
-        	<span>{this.props.title}</span>
-      </a>
-    </div>
-  </div>
-</nav>
 
-		);
-	}
-});
 var MessageBox = React.createClass({
 	componentDidUpdate:function( prevProps,  prevState)
 	{

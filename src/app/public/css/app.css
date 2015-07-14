@@ -1,22 +1,27 @@
 body{
 	background-color: #d4cdb9;
 	padding-top: 50px;
+	font-family: 'Helvetica Neue', Helvetica, Arial,
+	"Noto Sans","Microsoft YaHei", "微软雅黑", sans-serif;
+
 }
 .navWidget{
 	background-color: #baab91;
 }
 .messageWidget{
 	background-color: #e8e8ed;
-	height:180px;
+	height:280px;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
 .messageWidget li {
 	display:block;
+	font-size: 15px;
 }
 .messageWidget ul li p {
 	word-wrap: break-word;
 	    white-space: pre-wrap;
+			margin-bottom: 1px;
 }
 .messageWidget ul li span {
 	text-align: right;
