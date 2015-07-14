@@ -66,13 +66,13 @@ var MessageBox = React.createClass({
 	render:function(){
 		var createLine = function(data, index){
 			return <MessageLine data={data}/>
-		}
+		};
 		return (
-			<div className={"messageWidget row"}>
+			<div className={"messageWidget"}>
 				<p className = "col-md-11">Welcome!</p>
 				<ul className = "col-md-11">
-			{this.props.items.map(createLine)}
-			</ul>
+					{this.props.items.map(createLine)}
+				</ul>
 			</div>
 		);
 	}
