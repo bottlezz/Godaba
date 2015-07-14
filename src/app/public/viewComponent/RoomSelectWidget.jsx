@@ -28,15 +28,18 @@ var CreateRoomWidget = React.createClass({
 	render:function(){
 		var name=this.state.roomName;
 		return (
-			<form action={name} method="GET">
-				<div>
-				<input type="text" placeholder="room302...(no space)" ref="filterTextInput" onChange={this.handleChange}/>
-				<button>Join</button>
-				</div>
+			<div className="well col-xs-12 col-md-5">
+				<form action={name} method="GET">
+					<div className={"form-group"}>
+						<label>Room Name:</label>
+						<input type="text" placeholder="room302...(no space)" ref="filterTextInput" className="form-control" onChange={this.handleChange}/>
+					</div>
+					<button className="btn">Join</button>
+				</form>
 				<div>
 					<span>{name}</span>
 				</div>
-			</form>
+			</div>
 		);
 	}
 

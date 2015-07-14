@@ -29,14 +29,16 @@ var ChatWidget=React.createClass({
 	render:function(){
 		if(this.props.userId==null){
 			return(
+				<div className="well col-xs-12 col-md-5">
+						<form onSubmit={this.updateName} >
+							<div className={"form-group"}>
+								<label>Your Name:</label>
+								<input ref="nameBox" type="text" palceholder="John.Doe" className={"form-control"} autofocus></input>
+							</div>
+							<input type="submit" value="Done" className={"btn"}></input>
+						</form>
 
-				<form onSubmit={this.updateName} className="col-xs-10 col-md-5">
-					<div className={"form-group"}>
-						<label>Your Name:</label>
-						<input ref="nameBox" type="text" palceholder="John.Doe" className={"form-control"}></input>
-					</div>
-					<input type="submit" value="Done" className={"btn"}></input>
-				</form>
+				</div>
 			);
 		}else{
 
