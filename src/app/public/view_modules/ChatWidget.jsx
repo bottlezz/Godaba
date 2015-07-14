@@ -68,7 +68,7 @@ var MessageBox = React.createClass({
 			return <MessageLine data={data}/>
 		};
 		return (
-			<div className={"messageWidget"}>
+			<div className={"messageWidget col-md-12 "}>
 				<p className = "col-md-11">Welcome!</p>
 				<ul className = "col-md-11">
 					{this.props.items.map(createLine)}
@@ -99,7 +99,7 @@ var InputBox = React.createClass({
 	},
 	render:function(){
 		return (
-			<div className={"inputWidget row"}>
+			<div className={"inputWidget col-md-12"}>
 			<form onSubmit={this.handleSubmit}>
 				<div className={"col-xs-9 nopadding"}>
 					<textarea rows="1" className={"form-control"} placeholder="Type here..." ref="userInput">
