@@ -5,6 +5,9 @@ body{
 	"Noto Sans","Microsoft YaHei", "微软雅黑", sans-serif;
 
 }
+.navbar-brand{
+	padding: 2px;
+}
 .navWidget{
 	background-color: #baab91;
 }
