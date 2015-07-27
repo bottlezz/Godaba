@@ -27,6 +27,13 @@ function renderNoteHost(socket,roomid){
 		document.getElementById("pluginMount")
 	);
 }
+function renderRoom(socket){
+	return React.render(
+		<RoomWidget socket={socket}/>,
+		document.getElementById("mount")
+	);
+
+};
 //socket io setup
 
 
@@ -36,15 +43,20 @@ var isHost=false;
 
 
 var roomid=decodeURI(window.location.pathname);
+var room = renderRoom(socket);
+
 
 if(roomid=="/"){
 	//main page, do nothing;
 	// render room selection, join room /create room
-	renderSelect();
-}else{
+	//renderSelect();
 
-  var note=renderNoteClient(socket);
-	var chat=renderChat(socket,roomid);
+}else{
+	room.setState({roomid:roomid});
+  //var note=renderNoteClient(socket);
+	//var chat=renderChat(socket,roomid);
+
+
 	socket.on("room_host",function(){
 		isHost=true;
 		note=renderNoteHost(socket,roomid);

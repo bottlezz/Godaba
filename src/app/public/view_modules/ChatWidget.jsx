@@ -1,6 +1,6 @@
 var ChatWidget=React.createClass({
 	getInitialState: function() {
-      return { messages:[]};
+      return { messages:[],displayName:null,userId:null};
   },
 	componentDidMount:function(){
 		//initial socket io once loaded.
@@ -65,7 +65,7 @@ var MessageBox = React.createClass({
 	},
 	render:function(){
 		var createLine = function(data, index){
-			return <MessageLine data={data}/>
+			return <MessageLine data={data} key={index}/>
 		};
 		return (
 			<div className={"messageWidget col-md-12 "}>
