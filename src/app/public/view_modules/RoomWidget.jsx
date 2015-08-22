@@ -15,8 +15,14 @@ var RoomWidget = React.createClass({
         return (<ChatWidget socket={this.props.socket} roomId={roomid} key={pluginName}/>);
         break;
       case "sharedNote":
+        for (var role in roles) {
+          if(role=="sharedNoteHost"){
+            return (<SharedNoteHostWidget socket={this.props.socket} roomId={roomid} key={pluginName}/>);
+          }
+        }
         return (<SharedNoteClientWidget socket={this.props.socket} key={pluginName}/>);
         break;
+
       default:
         return;
     }
@@ -27,10 +33,19 @@ var RoomWidget = React.createClass({
     }else{
       return (
         <div>
-              {this.pluginObjs=this.state.plugins.map(this.mountPlugin)}
-      </div>);
-
+          {this.pluginObjs=this.state.plugins.map(this.mountPlugin)}
+        </div>
+      );
     }
   }
-
+});
+var RoomConfigWidget = React.createClass({
+  getPluginList:function(){
+    var list=["chat","sharedNote"];
+    return list;
+  },
+  render:function(){
+    return (<div>
+    </div>);
+  }
 });
