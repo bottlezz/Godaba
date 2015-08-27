@@ -1,7 +1,12 @@
-var httpServer = require("./httpServer").listen(process.env.PORT || 8000, function(){
-	var host=httpServer.address().address;
-	var port= httpServer.address().port;
-  console.log('Example app listening at http://%s:%s', host, port);
+var dataStore=  require("./dataStore");
+var httpServer = require("./httpServer");
+var httpHandler=httpServer.expressApp.listen(process.env.PORT || 8000, function(){
+	var host=httpHandler.address().address;
+	var port=httpHandler.address().port;
+  console.log('godaba is listening at http://%s:%s', host, port);
 });
 
-var socketServer =new require('./socketServer')(httpServer);
+
+var socketServer =new require('./socketServer')(httpHandler);
+httpServer.dataStore = dataStore;
+socketServer.setDataStore(dataStore);

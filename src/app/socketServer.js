@@ -1,6 +1,6 @@
 function socketServer(target){
 
-
+	this.dataStore={};
 	var io= require('socket.io')(target);
 	// will move the room management component out later as a saperated service.
 	var rooms= new Map();
@@ -11,6 +11,11 @@ function socketServer(target){
     function isRoomEmpty(id){
 		return rooms.has(id);
 		//return false;
+	}
+	this.setDataStore=function(store){
+		this.dataStore=store;
+		rooms=this.dataStore.rooms;
+		users=this.dataStore.users;
 	}
 	//TODO: room storage data strucutre
 	function createRoom(id){
@@ -72,7 +77,8 @@ function socketServer(target){
 			}
 		});
 	});
-};
+	return this;
+}
 
 
 module.exports=socketServer;

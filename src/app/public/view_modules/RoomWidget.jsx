@@ -1,6 +1,6 @@
-/// this is the file to control all plugins
+/// this is the module to control all plugins
 /// what should be save here?
-/// data that needs to be shared by all plugins, such as , pub-sub handler, roomid.
+/// data that needs to be shared by all plugins, such as , pub-sub handler, roomid. user information.
 
 var RoomWidget = React.createClass({
   getInitialState:function(){
